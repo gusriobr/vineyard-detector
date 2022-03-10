@@ -94,3 +94,9 @@ https://paperswithcode.com/sota/image-classification-on-imagenet
 
 
 https://blog.tensorflow.org/2020/05/bigtransfer-bit-state-of-art-transfer-learning-computer-vision.html
+
+
+
+# References
+
+* Y. Liang, S. T. Monteiro and E. S. Saber, "Transfer learning for high resolution aerial image classification," 2016 IEEE Applied Imagery Pattern Recognition Workshop (AIPR), 2016, pp. 1-8, doi: 10.1109/AIPR.2016.8010600.
