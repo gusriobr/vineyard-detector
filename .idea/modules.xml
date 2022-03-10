@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../srs/.idea/srs.iml" filepath="$PROJECT_DIR$/../srs/.idea/srs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/vineyard-detector.iml" filepath="$PROJECT_DIR$/.idea/vineyard-detector.iml" />
     </modules>
   </component>

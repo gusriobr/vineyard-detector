@@ -9,7 +9,7 @@ from shapely.geometry import shape
 import test.cfg_test as tcfg
 
 from vineyard.utils import lir
-from data.patches import getCellMatrix, project_geo
+from vineyard.data.patches import getCellMatrix, project_geo
 
 
 class TestInnerRect(unittest.TestCase):

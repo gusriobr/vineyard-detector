@@ -140,70 +140,70 @@ if __name__ == "__main__":
 
 # from matplotlib import pyplot as plt
 
-# data = np.flip(cells, 0)
+# data.py = np.flip(cells, 0)
 
 # # The normal figure
 # fig = plt.figure(figsize=(16, 12))
 # ax = fig.add_subplot(111)
 # ax.axes.xaxis.set_visible(False)
 # ax.axes.yaxis.set_visible(False)
-# im = ax.imshow(data, origin='lower', interpolation='None', cmap='Greys_r')
+# im = ax.imshow(data.py, origin='lower', interpolation='None', cmap='Greys_r')
 # fig.colorbar(im)
 
-# data = np.flip(h, 0)
+# data.py = np.flip(h, 0)
 
 # # The normal figure
 # fig = plt.figure(figsize=(16, 12))
 # ax = fig.add_subplot(111)
 # ax.axes.xaxis.set_visible(False)
 # ax.axes.yaxis.set_visible(False)
-# im = ax.imshow(data, origin='lower', interpolation='None', cmap='viridis')
+# im = ax.imshow(data.py, origin='lower', interpolation='None', cmap='viridis')
 # fig.colorbar(im)
 
-# data = np.flip(v, 0)
+# data.py = np.flip(v, 0)
 
 # # The normal figure
 # fig = plt.figure(figsize=(16, 12))
 # ax = fig.add_subplot(111)
 # ax.axes.xaxis.set_visible(False)
 # ax.axes.yaxis.set_visible(False)
-# im = ax.imshow(data, origin='lower', interpolation='None', cmap='viridis')
+# im = ax.imshow(data.py, origin='lower', interpolation='None', cmap='viridis')
 # fig.colorbar(im)
 
-# data = np.flip(v*h, 0)
+# data.py = np.flip(v*h, 0)
 
 # h_vec = lir.h_vector(h, 2, 2)
 # v_vec = lir.v_vector(v, 2, 2)
 # spans = lir.spans(h_vec, v_vec)
 
-# data = np.flip(span_map[:, :, 0], 0)
+# data.py = np.flip(span_map[:, :, 0], 0)
 
 # # The normal figure
 # fig = plt.figure(figsize=(16, 12))
 # ax = fig.add_subplot(111)
 # ax.axes.xaxis.set_visible(False)
 # ax.axes.yaxis.set_visible(False)
-# im = ax.imshow(data, origin='lower', interpolation='None', cmap='viridis')
+# im = ax.imshow(data.py, origin='lower', interpolation='None', cmap='viridis')
 # fig.colorbar(im)
 
 
-# data = np.flip(span_map[:, :, 1], 0)
+# data.py = np.flip(span_map[:, :, 1], 0)
 
 # # The normal figure
 # fig = plt.figure(figsize=(16, 12))
 # ax = fig.add_subplot(111)
 # ax.axes.xaxis.set_visible(False)
 # ax.axes.yaxis.set_visible(False)
-# im = ax.imshow(data, origin='lower', interpolation='None', cmap='viridis')
+# im = ax.imshow(data.py, origin='lower', interpolation='None', cmap='viridis')
 # fig.colorbar(im)
 
 
-# data = np.flip(span_map[:, :, 0] * span_map[:, :, 1], 0)
+# data.py = np.flip(span_map[:, :, 0] * span_map[:, :, 1], 0)
 
 # # The normal figure
 # fig = plt.figure(figsize=(16, 12))
 # ax = fig.add_subplot(111)
 # ax.axes.xaxis.set_visible(False)
 # ax.axes.yaxis.set_visible(False)
-# im = ax.imshow(data, origin='lower', interpolation='None', cmap='viridis')
+# im = ax.imshow(data.py, origin='lower', interpolation='None', cmap='viridis')
 # fig.colorbar(im)

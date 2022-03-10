@@ -34,7 +34,6 @@ def extract_patches(input_folder, output_folder, patch_options=None):
         patch_options = {}
     folder_per_category = patch_options.get("folder_per_category", False)
     size = patch_options.get("size", 64)
-    step_size = patch_options.get("step_size", size // 2)
     max_patches = patch_options.get("max_patches", 50)
 
     for img in os.listdir(input_folder):
@@ -112,7 +111,7 @@ def getCellMatrix(geom, size):
     nWidth = int(math.floor(width / size))
     nHeight = int(math.floor(height / size))
 
-    grid = np.zeros((nHeight, nWidth), np.int32)
+    grid = np.zeros((nHeight, nWidth), np.uint8)
 
     for i in range(height):
         for j in range(width):

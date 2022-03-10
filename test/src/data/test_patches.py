@@ -16,7 +16,6 @@ class TestPatches(unittest.TestCase):
         img = imread(tcfg.resource("lir/1_93BFED23EE.png"))
 
         patches = list(sliding_window(img))
-
         self.assertGreater(len(patches), 0)
 
 
