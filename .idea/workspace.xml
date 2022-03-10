@@ -5,88 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dff21a1-1473-4862-b41c-a127652c2c18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/selectedParcels/selectedGeometries.cpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/selectedParcels/selectedGeometries.dbf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/selectedParcels/selectedGeometries.prj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/selectedParcels/selectedGeometries.qpj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/selectedParcels/selectedGeometries.shp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/selectedParcels/selectedGeometries.shx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet.hist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet.model/keras_metadata.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet.model/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet.model/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet.model/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/restnet_chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19.hist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19.model/keras_metadata.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19.model/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19.model/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19.model/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration1/vgg19_chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19.hist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19.model/keras_metadata.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19.model/saved_model.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19.model/variables/variables.data-00000-of-00001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19.model/variables/variables.index" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/results/iteration2/vgg19_chart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/10_42.0_42.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/11_21.0_21.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/11_9.0_9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/16_0.0_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/24_42.0_42.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/24_48.0_48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/2_44.0_44.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/5_35.0_35.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/7_0.0_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/1/7_37.0_37.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_10.0_10.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_11.0_11.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_4.0_4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_5.0_5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_6.0_6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_7.0_7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_8.0_8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/resources/patches/2/3_9.0_9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/src/data/test_dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/data/build.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/data/dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/data/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/data/raster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/data/run.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/evaluation/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/evaluation/charts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/evaluation/eval.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/inference/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/inference/run_inf.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/models/resnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/models/transferlr.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/postproc/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/postproc/run_post.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/train/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/train/model.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/train/prune.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vineyard/train/run_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/cnn/models/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/cnn/models/resnet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/apply_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/apply_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/dataset/combine_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/dataset/combine_images.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/raster.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/raster.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vineyard-detector.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vineyard-detector.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/results/rasterized.tif" beforeDir="false" afterPath="$PROJECT_DIR$/test/results/rasterized.tif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/data/test_patches.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/data/test_patches.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/data/test_prepare_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/data/test_prepare_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/utils/test_cell.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/utils/test_cell.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/src/utils/test_lir.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/src/utils/test_lir.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/cfg.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/cfg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/data/patches.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/data/patches.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/data/prepare_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/data/prepare_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -384,7 +308,7 @@
       <workItem from="1646675296184" duration="1198000" />
       <workItem from="1646840261335" duration="109000" />
       <workItem from="1646840666961" duration="13253000" />
-      <workItem from="1646894341009" duration="648000" />
+      <workItem from="1646894341009" duration="1230000" />
     </task>
     <servers />
   </component>

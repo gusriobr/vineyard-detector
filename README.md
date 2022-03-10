@@ -1,7 +1,7 @@
 Vineyard detection using high resolution images (25cm/px)
 ===============================================================
 
-Under construction
+UNDER DEVELOPMENT
 
 # Objective
 
