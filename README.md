@@ -95,6 +95,17 @@ https://paperswithcode.com/sota/image-classification-on-imagenet
 
 https://blog.tensorflow.org/2020/05/bigtransfer-bit-state-of-art-transfer-learning-computer-vision.html
 
+# Final results
+
+| model| loss| accuracy| val_loss| val_accuracy |
+| -----| ----| --------| -------| ---------- |
+| cnnv1| 0.005155| 0.998417| 0.001896| 0.999694 |
+| ResNet50| 0.656780| 0.947230| 0.401935| 0.969056 |
+| vgg19_64| 0.654819| 0.941029| 0.403857| 0.964154 |
+| Xception| 0.919684| 0.933509| 0.726747| 0.948223 |
+| InceptionV3| 1.511058| 0.891029| 1.000285| 0.928002 |
+| effNet| 2.469209| 0.801715| 1.608626| 0.874387 |
+
 
 
 # References and resources

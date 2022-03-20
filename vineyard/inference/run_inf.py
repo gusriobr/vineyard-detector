@@ -1,17 +1,17 @@
 import logging
 import os
-
+import tensorflow as tf
 import numpy as np
 from keras.models import load_model
 from keras_preprocessing.image import ImageDataGenerator
 from skimage import io
 from tensorflow.python.keras import backend as K
 
-import cnn.config as cfg
+import cfg
 from data.model import DatasetDef
 from srs.raster import georeference_image
 
-logging.basicConfig(level=logging.INFO)
+cfg.configLog()
 
 
 def comp_file(filename):
@@ -178,6 +178,7 @@ if __name__ == '__main__':
     for m in models:
         # clear tensorflow memory
         K.clear_session()
+        tf.keras.backend.clear_session()
 
         model_path = m[0]
         tag = m[1]  # model_name

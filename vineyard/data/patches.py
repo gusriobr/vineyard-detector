@@ -36,6 +36,10 @@ def extract_patches(input_folder, output_folder, patch_options=None):
     size = patch_options.get("size", 64)
     max_patches = patch_options.get("max_patches", 50)
 
+    files = os.listdir(input_folder)
+    if len(files) == 0:
+        raise Exception("The LIRs folder is empty!")
+
     for img in os.listdir(input_folder):
         img_f = os.path.join(input_folder, img)
         category, f_name = get_prefix(img_f)

@@ -8,7 +8,8 @@ from data.patches import extract_patches
 from data.prepare_data import create_lirs
 from vineyard.data import dataset
 
-logging.basicConfig(level=logging.INFO)
+cfg.configLog()
+
 
 def prepare_folder(folder):
     """
@@ -25,13 +26,15 @@ def prepare_folder(folder):
 if __name__ == '__main__':
     raster_folder = "/media/gus/data/viticola/raster"
     feature_file = cfg.resource('selectedParcels/selected_parcels.shp')
-    dataset_folder = "/media/gus/data/viticola/datasets/dataset_v2"
+    dataset_folder = "/media/gus/data/viticola/datasets/dataset_v3"
 
     do_extract_lirs = False
     do_extract_patches = True
 
+
     # extract feature lirs from raster filtering by feature file
     lirs_folder = os.path.join(dataset_folder, "lirs")
+    Path(lirs_folder).mkdir(parents=True, exist_ok=True)
     if do_extract_lirs:
         logging.info("Extracting lirs from raster images")
         prepare_folder(lirs_folder)
@@ -39,10 +42,11 @@ if __name__ == '__main__':
 
     # extract patches from lirs
     patches_path = os.path.join(dataset_folder, "patches")
+    Path(patches_path).mkdir(parents=True, exist_ok=True)
     if do_extract_patches:
         logging.info("Extracting patches from lirs")
         prepare_folder(patches_path)
-        patch_options = {"size": 48, "folder_per_category": True}
+        patch_options = {"size": 64, "folder_per_category": True, "max_patches": 60}
         extract_patches(lirs_folder, patches_path, patch_options)
 
     # features with label 2 --> rename to mark as "no-vineyard"

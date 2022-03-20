@@ -1,3 +1,4 @@
+import numpy as np
 import rasterio
 from affine import Affine
 
@@ -34,3 +35,10 @@ def georeference_image(img, img_source, img_filename, scale=1, bands=3):
                 # iterate over channels and write bands
                 img_channel = img[:, :, ch]
                 dst.write(img_channel, ch + 1)  # rasterio bands are 1-indexed
+
+
+def standarize_dataset(x_test, mean, std):
+    x_tr = x_test * (1.0 / 255.0)
+    x_tr -= mean
+    x_tr /= std
+    return x_tr

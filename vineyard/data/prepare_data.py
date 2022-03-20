@@ -13,10 +13,10 @@ from rasterio import features
 from rasterio import mask
 from shapely.geometry import Polygon
 
+import cfg
 from vineyard.data.patches import get_lir, extract_patches
 
-logging.basicConfig(level=logging.INFO)
-
+cfg.configLog()
 
 def rnd_name():
     return uuid.uuid4().hex[:10].upper().replace('0', 'X').replace('O', 'Y')

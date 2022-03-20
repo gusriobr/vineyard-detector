@@ -1,14 +1,6 @@
 # import the necessary packages
-from keras import backend as K
-from keras.layers import Flatten, BatchNormalization
-from keras.layers import Input
-from keras.layers import add
-from keras.layers.convolutional import AveragePooling2D
-from keras.layers.convolutional import Conv2D
-from keras.layers.core import Activation
-from keras.layers.core import Dense
-from keras.models import Model
-from keras.regularizers import l2
+
+import tensorflow as tf
 
 
 class ResNet:
@@ -19,29 +11,32 @@ class ResNet:
         shortcut = data
 
         # the first block of the ResNet module are the 1x1 CONVs
-        bn1 = BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(data)
-        act1 = Activation("relu")(bn1)
-        conv1 = Conv2D(int(K * 0.25), (1, 1), use_bias=False, kernel_regularizer=l2(reg))(act1)
+        bn1 = tf.keras.layers.BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(data)
+        act1 = tf.keras.layers.Activation("relu")(bn1)
+        conv1 = tf.keras.layers.Conv2D(int(K * 0.25), (1, 1), use_bias=False,
+                                       kernel_regularizer=tf.keras.regularizers.l2(reg))(act1)
 
         # the second block of the ResNet module are the 3x3 CONVs
-        bn2 = BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(conv1)
-        act2 = Activation("relu")(bn2)
-        conv2 = Conv2D(int(K * 0.25), (3, 3), strides=stride, padding="same", use_bias=False,
-                       kernel_regularizer=l2(reg))(act2)
+        bn2 = tf.keras.layers.BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(conv1)
+        act2 = tf.keras.layers.Activation("relu")(bn2)
+        conv2 = tf.keras.layers.Conv2D(int(K * 0.25), (3, 3), strides=stride, padding="same", use_bias=False,
+                                       kernel_regularizer=tf.keras.regularizers.l2(reg))(act2)
 
         # the third block of the ResNet module is another set of 1x1
         # CONVs
-        bn3 = BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(conv2)
-        act3 = Activation("relu")(bn3)
-        conv3 = Conv2D(K, (1, 1), use_bias=False, kernel_regularizer=l2(reg))(act3)
+        bn3 = tf.keras.layers.BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(conv2)
+        act3 = tf.keras.layers.Activation("relu")(bn3)
+        conv3 = tf.keras.layers.Conv2D(K, (1, 1), use_bias=False, kernel_regularizer=tf.keras.regularizers.l2(reg))(
+            act3)
 
         # if we are to reduce the spatial size, apply a CONV layer to
         # the shortcut
         if red:
-            shortcut = Conv2D(K, (1, 1), strides=stride, use_bias=False, kernel_regularizer=l2(reg))(act1)
+            shortcut = tf.keras.layers.Conv2D(K, (1, 1), strides=stride, use_bias=False,
+                                              kernel_regularizer=tf.keras.regularizers.l2(reg))(act1)
 
         # add together the shortcut and the final CONV
-        x = add([conv3, shortcut])
+        x = tf.keras.layers.add([conv3, shortcut])
 
         # return the addition as the output of the ResNet module
         return x
@@ -56,18 +51,19 @@ class ResNet:
 
         # if we are using "channels first", update the input shape
         # and channels dimension
-        if K.image_data_format() == "channels_first":
+        if tf.keras.backend.image_data_format() == "channels_first":
             inputShape = (depth, height, width)
             chanDim = 1
 
         # set the input and apply BN
-        inputs = Input(shape=inputShape)
+        inputs = tf.keras.layers.Input(shape=inputShape)
         x = inputs
         if augmentation_layer is not None:
             x = augmentation_layer(x)
-        x = BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(x)
+        x = tf.keras.layers.BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(x)
 
-        x = Conv2D(filters[0], (7, 7), use_bias=False, padding="same", kernel_regularizer=l2(reg))(x)
+        x = tf.keras.layers.Conv2D(filters[0], (7, 7), use_bias=False, padding="same",
+                                   kernel_regularizer=tf.keras.regularizers.l2(reg))(x)
         #     x = MaxPooling2D((3, 3), strides=(2, 2))(x)
 
         # # check if we are utilizing the CIFAR dataset
@@ -96,17 +92,22 @@ class ResNet:
                 x = ResNet.residual_module(x, filters[i], (1, 1), chanDim, bnEps=bnEps, bnMom=bnMom)
 
         # apply BN => ACT => POOL
-        x = BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(x)
-        x = Activation("relu")(x)
-        x = AveragePooling2D((6, 6))(x)
+        x = tf.keras.layers.BatchNormalization(axis=chanDim, epsilon=bnEps, momentum=bnMom)(x)
+        x = tf.keras.layers.Activation("relu")(x)
+        x = tf.keras.layers.AveragePooling2D((6, 6))(x)
 
         # softmax classifier
-        x = Flatten()(x)
-        x = Dense(classes, kernel_regularizer=l2(reg))(x)
-        x = Activation("softmax")(x)
+        x = tf.keras.layers.Flatten()(x)
+        x = tf.keras.layers.Dense(classes, kernel_regularizer=tf.keras.regularizers.l2(reg))(x)
+        x = tf.keras.layers.Activation("softmax")(x)
 
         # create the model
-        model = Model(inputs, x, name="resnet")
+        model = tf.keras.Model(inputs, x, name="resnet")
 
         # return the constructed network architecture
         return model
+
+
+if __name__ == '__main__':
+    # ResNet.build(48, 48, 3, 1, (2, 2), (64, 64))
+    pass

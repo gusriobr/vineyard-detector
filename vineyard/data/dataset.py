@@ -4,6 +4,8 @@ import random
 import shutil
 from pathlib import Path
 
+import cfg
+
 try:
     import _pickle as pickle  # cPickle
 except:
@@ -12,8 +14,7 @@ except:
 import numpy as np
 from keras.preprocessing.image import img_to_array, load_img
 
-logging.basicConfig(level=logging.INFO)
-
+cfg.configLog()
 
 def split_patches(base_folder, output_folder, split=0.3, shuffle=True):
     """

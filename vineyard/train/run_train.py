@@ -1,29 +1,28 @@
 import logging
 import os
+from pathlib import Path
 
-import joblib
-import numpy as np
 import tensorflow as tf
-from keras import layers
-from keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
-from keras_preprocessing.image import ImageDataGenerator
-from tensorflow.python.keras.models import Sequential
-from tensorflow.python.keras.models import load_model
 
 import cfg
 from data.model import DatasetDef
-from evaluation.eval import evaluate_model_file
-from models.transferlr import build_binary_classifier
+from data.raster import standarize_dataset
+from evaluation.activations import visualize_filters
+from evaluation.eval import evaluate_model_file, summarize
+from models.cnn import BasicCNN
+from models.transferlr import build_model_f
+from train import train
 from vineyard.data import dataset
 
-logging.basicConfig(level=logging.INFO)
+layers = tf.keras.layers
 
-IMG_SIZE = 48
+cfg.configLog()
+
 # https://keras.io/examples/vision/image_classification_efficientnet_fine_tuning/
 
 kwargs = {}
 
-img_augmentation = Sequential([
+img_augmentation = tf.keras.models.Sequential([
     # layers.RandomRotation(factor=0.15),
     # layers.RandomTranslation(height_factor=0.1, width_factor=0.1),
     # layers.RandomFlip(),
@@ -32,103 +31,100 @@ img_augmentation = Sequential([
 ], name="img_augmentation")
 
 
-def fine_tunning(model_file):
-    model = load_model(model_file)
 
-    model.trainable = True
-    model.compile(
-        optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"]
-    )
-    return model
+def build_cc():
+    return BasicCNN.build(IMG_SIZE, IMG_SIZE, 3, num_classes=2, augmentation_layer=img_augmentation)
 
 
-def save(object, file_path):
-    import jsonpickle
-    json = jsonpickle.encode(object)
-    # save json content
-    fo = open(file_path, "w")
-    fo.write(json)
-    fo.close()
+if __name__ == '__main__':
+    dataset_file = "/media/gus/data/viticola/datasets/dataset_v3/dataset.npy"
+    base_output = cfg.results("iteration2")
 
+    train_model = False
+    eval_model = False
+    tune_model = False
+    eval_tune = False
+    plot_filters = True
 
-def train(model, model_label, dataset_file, output_folder, epochs=200, batch_size=32):
-    (x_train, y_train), (x_test, y_test) = dataset.load(dataset_file)
-    # y_train = utils.to_categorical(y_train, 2) no needed for binary classifier
-    # y_test = utils.to_categorical(y_test, 2)
-    datagen = ImageDataGenerator(rescale=1. / 255,
-                                 featurewise_center=True,
-                                 featurewise_std_normalization=True,
-                                 rotation_range=20,
-                                 width_shift_range=0.2,
-                                 height_shift_range=0.2,
-                                 horizontal_flip=True,
-                                 vertical_flip=True,
-                                 brightness_range=(0.8, 1.2),
-                                 channel_shift_range=30
-                                 )
-    # compute quantities required for featurewise normalization
-    datagen.fit(x_train)
+    model = None
+    model_path = None
 
-    train_gen = datagen.flow(x_train, y_train, batch_size=batch_size)
-    val_gen = datagen.flow(x_test, y_test, batch_size=batch_size)
-    # save model and imagen normalization parameters
-    model_conf = {"mean": datagen.mean, "std": datagen.std}
-    save(model_conf, os.path.join(output_folder, "{}.json".format(model_label)))
+    train_epochs = 200
+    IMG_SIZE = 64
+    batch_size = 64
 
-    model_path = os.path.join(output_folder, "{}.model".format(model_label))
-    metric_to_monitor = "val_accuracy"
-    min_delta = 0.0001
-    k_callbacks = [
-        ModelCheckpoint(model_path, monitor=metric_to_monitor, verbose=0, save_best_only=True, save_weights_only=False,
-                        mode='max', save_freq="epoch"),
-        ReduceLROnPlateau(monitor=metric_to_monitor, factor=0.1, patience=10, mode='auto', min_delta=min_delta,
-                          cooldown=0, min_lr=1e-6),
-        EarlyStopping(monitor=metric_to_monitor, patience=30, min_delta=min_delta)
+    logging.info("Starting training process")
+
+    model_defs = [
+        # build_model_f("InceptionV3", img_augmentation, IMG_SIZE),
+        # ["Xception", build_model_f("Xception", img_augmentation, IMG_SIZE)],
+        # ["effNet", build_model_f("EfficientNetB0", img_augmentation, IMG_SIZE)],
+        ["cnnv1", build_cc],
+        # ["InceptionV3", build_model_f("InceptionV3", img_augmentation, IMG_SIZE)],
+        ["ResNet50", build_model_f("ResNet50", img_augmentation, IMG_SIZE)],
     ]
 
-    history = model.fit(
-        train_gen,
-        steps_per_epoch=len(y_train) // batch_size,
-        epochs=epochs,
-        validation_data=val_gen,
-        validation_steps=len(y_test) // batch_size,
-        callbacks=k_callbacks
-    )
-    #
-    history_file = os.path.join(output_folder, "{}.hist".format(model_label))
-    joblib.dump(history, history_file)
+    for model_def in model_defs:
+        tf.keras.backend.clear_session()
 
-    return model_path
+        model_label = model_def[0]
+        model_builder = model_def[1]
+        model_folder = os.path.join(base_output, model_label)
+        Path(model_folder).mkdir(parents=True, exist_ok=True)
+        try:
+            if train_model:
+                logging.info(">>> Training model: " + model_label)
+                model = model_builder()
+                optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
+                model.compile(optimizer=optimizer, loss="binary_crossentropy", metrics=["accuracy"])
+                train(model, dataset_file, model_folder, epochs=train_epochs, batch_size=batch_size)
+                logging.info("Training finished for: " + model_label)
 
+            model_path = os.path.join(model_folder, "model.md")
+            if eval_model:
+                # standarize test images images
+                logging.info("Evaluating model: " + model_label)
+                (x_train, y_train), (x_test, y_test) = dataset.load(dataset_file)
 
-IMG_SIZE = 48
-if __name__ == '__main__':
-    dataset_file = "/media/gus/data/viticola/datasets/dataset_v2/dataset.npy"
-    output_folder = cfg.results("iteration2")
+                model_conf_file = os.path.join(model_folder, "config.json")
+                model_conf = DatasetDef.read(model_conf_file)
+                x_tr = standarize_dataset(x_test, model_conf["mean"], model_conf["std"])
+                evaluate_model_file(model_path, x_tr, y_test)
 
-    # model = build_binary_classifier()
-    model_label = "vgg19"
-    # model = ResNet.build(IMG_SIZE, IMG_SIZE, 3, 1, (3, 3, 3, 3), filters=(64, 64, 64, 64),
-    #                      augmentation_layer=img_augmentation)
-    # model = build_binary_classifier_restNet(augmentation_layer=img_augmentation, freeze_weights=False)
-    model = build_binary_classifier(augmentation_layer=img_augmentation, freeze_weights=True)
+            if plot_filters:
+                logging.info("Creating filter visualization for model: " + model_label)
+                output_vis = os.path.join(model_folder, "vis")
+                if model is None:
+                    model = tf.keras.models.load_model(model_path)
+                visualize_filters(model, output_vis, image_size=IMG_SIZE)
 
-    optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
-    model.compile(optimizer=optimizer, loss="binary_crossentropy", metrics=["accuracy"])
+            if tune_model:
+                if model is None:
+                    model = tf.keras.models.load_model(model_path)
 
-    model_path = train(model, model_label, dataset_file, output_folder, epochs=200, batch_size=96)
+                logging.info("Fine tuning model " + model_path)
+                model.trainable = True
+                model_label = model_label + "_ftd"
+                model_folder = os.path.join(base_output, model_label)
+                train(model, dataset_file, model_folder, epochs=train_epochs, batch_size=batch_size)
 
-    model_conf_file = model_path.replace(".model", ".json")
-    model_conf = DatasetDef.read(model_conf_file)
-    # standarize test images images
-    (x_train, y_train), (x_test, y_test) = dataset.load(dataset_file)
-    x_tr = np.zeros(shape=x_test.shape, dtype=np.float32)
-    x_tr = x_test * (1.0 / 255.0)
-    x_tr -= model_conf["mean"]
-    x_tr /= model_conf["std"]
-    evaluate_model_file(model_path, x_tr, y_test)
-    #
-    # model = fine_tunning(model_path)
-    # fine_tunned = train(model, model_label + "_ftd", dataset_file, epochs=200, batch_size=32)
-    # # evaluate_model(fine_tunned, x_tr, y_test)
-    # evaluate_model(fine_tunned, fine_tunned, x_tr, y_test)
+                if plot_filters:
+                    output_vis = os.path.join(model_folder, "vis")
+                    visualize_filters(model, output_vis, image_size=IMG_SIZE)
+
+                if eval_tune:
+                    # standarize test images images
+                    if x_test is None:
+                        (x_train, y_train), (x_test, y_test) = dataset.load(dataset_file)
+
+                    model_conf_file = os.path.join(model_folder, "config.json")
+                    model_conf = DatasetDef.read(model_conf_file)
+                    x_tr = standarize_dataset(x_test, model_conf["mean"], model_conf["std"])
+                    evaluate_model_file(model_path, x_tr, y_test)
+        except Exception as e:
+            logging.exception("Error while processing model " + model_label)
+            logging.critical(e, exc_info=True)
+
+        logging.info("Training process finished successfully!")
+
+        summarize(base_output)

@@ -11,7 +11,9 @@ from fiona.crs import from_epsg
 from rasterio import features
 from shapely.geometry import shape
 
-logging.basicConfig(level=logging.INFO)
+import cfg
+
+cfg.configLog()
 
 
 def vectorize_predictions(raster_file, shape_file):
