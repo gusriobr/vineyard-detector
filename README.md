@@ -95,7 +95,7 @@ https://paperswithcode.com/sota/image-classification-on-imagenet
 
 https://blog.tensorflow.org/2020/05/bigtransfer-bit-state-of-art-transfer-learning-computer-vision.html
 
-# Final results
+# Final results 
 
 | model| loss| accuracy| val_loss| val_accuracy |
 | -----| ----| --------| -------| ---------- |
