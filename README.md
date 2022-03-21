@@ -118,7 +118,7 @@ Trying to train state of the art model from scratch didn't make it better, using
 inner weights before training outcome a similar 43% accuracy. 
 Similar work [3] shows good performance (96-98% accuracy) of CNN networks in high resolution aerial images with relatively small patches (3x3 to 11x11 px). 
 
-# Iteration 2
+## Iteration 2
 If the state of art architecturs as RestNet50 could't make it better that 40% the hypothesis was that the problem was in 
 the *receptive field*. Patches of 48x48 could be too small so deeper architectures can't create good representations the
 layer layers
