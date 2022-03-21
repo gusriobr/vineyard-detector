@@ -11,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/raster.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/raster.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/train_srs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/train_srs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -278,7 +279,7 @@
       <workItem from="1647152156102" duration="8402000" />
       <workItem from="1647668332220" duration="8756000" />
       <workItem from="1647758151226" duration="15023000" />
-      <workItem from="1647836663111" duration="7171000" />
+      <workItem from="1647836663111" duration="7393000" />
     </task>
     <servers />
   </component>

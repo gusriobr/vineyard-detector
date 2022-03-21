@@ -118,22 +118,19 @@ Trying to train state of the art model from scratch didn't make it better, using
 inner weights before training outcome a similar 43% accuracy. 
 Similar work [3] shows good performance (96-98% accuracy) of CNN networks in high resolution aerial images with relatively small patches (3x3 to 11x11 px). 
 
-## Iteration 2
-If the state of art architecturs as RestNet50 could't make it better that 40% the hypothesis was that the problem was in 
-the *receptive field*. Patches of 48x48 could be too small so deeper architectures can't create good representations the
-layer layers
+## Iteration 2, increase image size
+If the state of art architectures as RestNet50 could't make it better that 40%, the hypothesis was that the problem was in 
+the *receptive field*. Patches of 48x48 could be too small, so deeper architectures can't create good representations the
+layer layers.
 
-The field of reception of images is reduced as we advance in the depth of the network. These architectures are 
-designed to handle 144px images, and changing the input tensor to only 48px causes filters on certain layers to be 
-limited to 1px, which may explain why deeper layers don't receive enough information and can't create specific pattern 
-detectors for this problem. 
+The receptive field of convNets is amplified as we get deeper in the network architecture, so deeper layers "see" or "use"
+bigger pixel-location information. These architectures are designed to handle 144px images, and changing the input tensor 
+to only 48px causes filters on certain layers to be limited to 1px, which may explain why deeper layers don't receive 
+enough information and can't create specific pattern detectors for this problem. 
 Visualizing the filters of the VGG-16 and RestNet-50 models delivered from scratch, only the first 3-4 layers showed 
 information, the rest were basically noise.
 
-## Iteration 2, increase image size
-
-To check patch size problem hypothesis in the next iteration a resize layer is included in the model before entering
-to first convolutional layer:
+To check this patch size problem, a resizing layer is included in the model before entering to first convolutional layer:
 ```python
     x = tf.keras.layers.Resizing(144, 144)(x)
 ```
