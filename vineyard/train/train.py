@@ -4,6 +4,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 import tensorflow as tf
+from keras_preprocessing.image import ImageDataGenerator
 
 import cfg
 from vineyard.data import dataset
@@ -73,7 +74,7 @@ def train(model, dataset_file, output_folder, epochs=200, batch_size=32, min_del
     # transform in panda dataframe and store as joblib file
     hist = dict(history.history)
     if 'lr' in hist:
-        hist.pop("lr") # remove key
+        hist.pop("lr")  # remove key
     df_hist = pd.DataFrame(hist)
 
     history_file = os.path.join(output_folder, "history.jbl")
@@ -88,5 +89,3 @@ def fine_tunning(model_file):
         optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"]
     )
     return model
-
-

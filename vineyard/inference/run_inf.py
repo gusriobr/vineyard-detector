@@ -170,11 +170,12 @@ if __name__ == '__main__':
         ['/media/gus/workspace/wml/vineyard-detector/results/iteration2/vgg19.model', 'vgg19', 1],
     ]
     input_folder = '/media/gus/data/rasters/aerial/pnoa/2020/'
+    output_folder = '/media/gus/data/viticola/raster/processed'
+
     input_images = [os.path.join(input_folder, f_image) for f_image in os.listdir(input_folder) if
                     f_image.endswith(".tif")]
 
     patch_size = 48
-    output_folder = '/media/gus/data/viticola/raster/processed'
     for m in models:
         # clear tensorflow memory
         K.clear_session()

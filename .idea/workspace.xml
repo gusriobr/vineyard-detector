@@ -5,13 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dff21a1-1473-4862-b41c-a127652c2c18" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/0_conv2d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/10_conv2d_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/11_separable_conv2d_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/1_conv2d_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/2_separable_conv2d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/3_separable_conv2d_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/4_conv2d_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/5_separable_conv2d_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/6_separable_conv2d_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/7_conv2d_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/8_separable_conv2d_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/cnn_activations/9_separable_conv2d_5.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/cnn/models/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/cnn/models/resnet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/apply_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/apply_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/dataset/combine_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/dataset/combine_images.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/raster.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/raster.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/train_srs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/train_srs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vineyard/evaluation/eval.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/evaluation/eval.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vineyard/inference/run_inf.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/inference/run_inf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vineyard/train/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/train/run_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vineyard/train/run_train_cpu.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/train/run_train_cpu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vineyard/train/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/train/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +96,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/vineyard/train" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/cnn_activations" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -87,11 +105,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/cnn_activations" />
       <recent name="$PROJECT_DIR$/vineyard/train" />
       <recent name="$PROJECT_DIR$/vineyard/evaluation" />
       <recent name="$PROJECT_DIR$/resources/selectedParcels" />
       <recent name="$PROJECT_DIR$/vineyard/models" />
-      <recent name="$PROJECT_DIR$/vineyard/data" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/results/iteration2/effNet" />
@@ -128,6 +146,9 @@
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vineyard/evaluation" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -275,6 +296,7 @@
       <workItem from="1647152156102" duration="8402000" />
       <workItem from="1647668332220" duration="8756000" />
       <workItem from="1647758151226" duration="15023000" />
+      <workItem from="1647836663111" duration="7058000" />
     </task>
     <servers />
   </component>
@@ -315,7 +337,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/vineyard/train/run_train.py</url>
-          <line>76</line>
+          <line>70</line>
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -41,7 +41,7 @@ if __name__ == '__main__':
     train_epochs = 10
     IMG_SIZE = 64
 
-    model_label = "cnnv1"
+    model_label = "cnnv1_64"
     model_folder = os.path.join(base_output, model_label)
     Path(model_folder).mkdir(parents=True, exist_ok=True)
     if train_model:

@@ -18,18 +18,12 @@ layers = tf.keras.layers
 
 cfg.configLog()
 
-# https://keras.io/examples/vision/image_classification_efficientnet_fine_tuning/
-
 kwargs = {}
 
 img_augmentation = tf.keras.models.Sequential([
-    # layers.RandomRotation(factor=0.15),
-    # layers.RandomTranslation(height_factor=0.1, width_factor=0.1),
-    # layers.RandomFlip(),
     layers.RandomContrast(factor=0.1),
     layers.RandomZoom(height_factor=(-0.2, 0.2))
 ], name="img_augmentation")
-
 
 
 def build_cc():
@@ -37,30 +31,30 @@ def build_cc():
 
 
 if __name__ == '__main__':
-    dataset_file = "/media/gus/data/viticola/datasets/dataset_v3/dataset.npy"
+    dataset_file = "/media/gus/data/viticola/datasets/dataset_v2/dataset.npy"
     base_output = cfg.results("iteration2")
 
-    train_model = False
+    train_model = True
     eval_model = False
     tune_model = False
     eval_tune = False
-    plot_filters = True
+    plot_filters = False
 
     model = None
     model_path = None
 
     train_epochs = 200
-    IMG_SIZE = 64
+    IMG_SIZE = 48
     batch_size = 64
 
     logging.info("Starting training process")
 
     model_defs = [
         # build_model_f("InceptionV3", img_augmentation, IMG_SIZE),
-        # ["Xception", build_model_f("Xception", img_augmentation, IMG_SIZE)],
-        # ["effNet", build_model_f("EfficientNetB0", img_augmentation, IMG_SIZE)],
-        ["cnnv1", build_cc],
-        # ["InceptionV3", build_model_f("InceptionV3", img_augmentation, IMG_SIZE)],
+        ["cnnv1_64", build_cc],
+        ["Xception", build_model_f("Xception", img_augmentation, IMG_SIZE)],
+        ["effNet_64", build_model_f("EfficientNetB0", img_augmentation, IMG_SIZE)],
+        ["InceptionV3", build_model_f("InceptionV3", img_augmentation, IMG_SIZE)],
         ["ResNet50", build_model_f("ResNet50", img_augmentation, IMG_SIZE)],
     ]
 
@@ -127,4 +121,4 @@ if __name__ == '__main__':
 
         logging.info("Training process finished successfully!")
 
-        summarize(base_output)
+        # summarize(base_output)

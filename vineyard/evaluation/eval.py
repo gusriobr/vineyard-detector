@@ -41,8 +41,8 @@ def summarize(base_folder):
     :param model_labels:
     :return:
     """
-    import tensorflow as tf
-    tf.config.set_visible_devices([], 'GPU')  # force CPU
+    # import tensorflow as tf
+    # tf.config.set_visible_devices([], 'GPU')  # force CPU
 
     # find nested folders with the history.jbl file
     model_folders = [folder for folder in os.listdir(base_folder) if
