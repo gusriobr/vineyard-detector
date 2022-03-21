@@ -1,14 +1,17 @@
 import logging
 import os
-import tensorflow as tf
+
 import numpy as np
-from keras.models import load_model
+import tensorflow as tf
 from keras_preprocessing.image import ImageDataGenerator
 from skimage import io
 from tensorflow.python.keras import backend as K
 
+layers = tf.keras.layers
+
 import cfg
 from data.model import DatasetDef
+from models.cnn import BasicCNN
 from srs.raster import georeference_image
 
 cfg.configLog()
@@ -164,28 +167,49 @@ def read_img(path):
     return rimg
 
 
+def build_model(model_folder, img_size=48):
+    """
+    :param model_folder:
+    :param img_size:
+    :return:
+    """
+    checkpoint_path = os.path.join(model_folder, "model.md")
+    img_augmentation = tf.keras.models.Sequential([
+        layers.RandomContrast(factor=0.1),
+        layers.RandomZoom(height_factor=(-0.2, 0.2))
+    ], name="img_augmentation")
+
+    loaded_model = BasicCNN.build(img_size, img_size, 3, num_classes=2, augmentation_layer=img_augmentation)
+    loaded_model.load_weights(checkpoint_path)
+
+    return loaded_model
+
+
 if __name__ == '__main__':
     # load srs model
     models = [
-        ['/media/gus/workspace/wml/vineyard-detector/results/iteration2/vgg19.model', 'vgg19', 1],
+        ['/media/gus/workspace/wml/vineyard-detector/results/iteration2/cnnv1/', 'cnnv1', 1],
     ]
     input_folder = '/media/gus/data/rasters/aerial/pnoa/2020/'
-    output_folder = '/media/gus/data/viticola/raster/processed'
+    output_folder = '/media/gus/data/viticola/raster/processed_v2'
 
     input_images = [os.path.join(input_folder, f_image) for f_image in os.listdir(input_folder) if
                     f_image.endswith(".tif")]
+
+    input_images = ['/media/gus/data/rasters/aerial/pnoa/2020/PNOA_CYL_2020_25cm_OF_etrsc_rgb_hu30_h05_0345_6-4.tif']
 
     patch_size = 48
     for m in models:
         # clear tensorflow memory
         K.clear_session()
         tf.keras.backend.clear_session()
-
         model_path = m[0]
         tag = m[1]  # model_name
-        model = load_model(model_path)
+
+        model = build_model(model_path)
+
         datagen = ImageDataGenerator(rescale=1. / 255, featurewise_center=True, featurewise_std_normalization=True)
-        model_conf = DatasetDef.read(model_path.replace(".model", ".json"))
+        model_conf = DatasetDef.read(os.path.join(model_path, "config.json"))
         datagen.mean = model_conf["mean"]
         datagen.std = model_conf["std"]
         std_func = standarize(model_conf["mean"], model_conf["std"])
