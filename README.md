@@ -135,7 +135,7 @@ To check this patch size problem, a resizing layer is included in the model befo
     x = tf.keras.layers.Resizing(144, 144)(x)
 ```
 
-With this the accuracy **boosted over 98%** in the basic CNN model and specify patters appeared in the layers:
+With this the accuracy **boosted over 98%** in the basic CNN model and specific patters appeared in the layer visualizations:
 
 | ![layer 5](resources/cnn_activations/5_separable_conv2d_2.png) |
 |:--:|
