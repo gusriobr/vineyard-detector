@@ -137,12 +137,15 @@ To check this patch size problem, a resizing layer is included in the model befo
 
 With this the accuracy **boosted over 98%** in the basic CNN model and specific patters appeared in the layer visualizations:
 
-|model | loss | accuracy|   val_loss  | val_accuracy|        
-|cnnv1 | 0.011079|   0.996549|   0.010886|       0.997820       |
-|ResNet50 | 0.656780|   0.947230|   0.401935|       0.969056    |
-|Xception | 0.919684|   0.933509|   0.726747|       0.948223    |
-|InceptionV3 | 1.511058|   0.891029|   1.000285|       0.928002 |
-|effNet | 3.613831|   0.698196|   1.506067|       0.836119      |
+|model|loss|accuracy|val_loss|val_accuracy|
+|-----|------|------|----|----|
+|cnnv1|0.011079|0.996549|0.010886|0.997820|
+|vgg19|0.748482|0.937569|0.452201|0.961119|
+|InceptionV3|0.989122|0.925333|0.687701|0.949128|
+|ResNet50|1.107025|0.914196|0.773526|0.943677|
+|Xception|1.013036|0.918431|1.034178|0.922965|
+|effNet|3.613831|0.698196|1.506067|0.836119|
+
 
 | ![layer 5](resources/cnn_activations/5_separable_conv2d_2.png) |
 |:--:|
@@ -153,17 +156,16 @@ With this the accuracy **boosted over 98%** in the basic CNN model and specific 
 | Layer 9 filter activations|
 
 ## Iteration 3, increase patch size
-As seen in iteration 2, the size of the image significantly affects the performance of the convnet. The resing layer 
+As seen in iteration 2, the size of the image significantly affects the performance of the convnet. The resizing layer 
 added in iteration 2 widens the image to allow deeper layers to have enough activation field to generate patterns, but 
-it doesn't really widen the source information, the patch information is the same.
+it doesn't really increase the information, the patch information is the same.
 In this iteration we generate a new dataset taking 64x64px as patch size. This has the drawback of a loss in prediction in 
-the final prediction. Keep in mind that the objective of the model is to predict areas with vineyards, by expanding the 
+the final prediction. Keep in mind that the objective of this model is to predict areas with vineyards, by expanding the 
 patch from 48px2 to 64px2 we increase the real prediction area from 12m2 to 16m2, which will lead to less precision 
 in the final segmentation of the image.
 
-Increa
-
 **Final results**
+Increasing the patch size has improved the performance in a 0.01% - 0.001% depending on the model. 
 
 | model| loss| accuracy| val_loss| val_accuracy |
 | -----| ----| --------| -------| ---------- |

@@ -13,8 +13,6 @@
       <change beforePath="$PROJECT_DIR$/../srs/srs/train_srs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/train_srs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/models/transferlr.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/models/transferlr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/train/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/train/run_train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +102,7 @@
       <recent name="$PROJECT_DIR$/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_train">
+  <component name="RunManager" selected="Python.eval">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -194,6 +192,9 @@
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vineyard/train" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -233,8 +234,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run_train" />
         <item itemvalue="Python.eval" />
+        <item itemvalue="Python.run_train" />
         <item itemvalue="Python.run_train_cpu" />
         <item itemvalue="Python.run_eval" />
         <item itemvalue="Python.run (1)" />
@@ -278,7 +279,8 @@
       <workItem from="1647152156102" duration="8402000" />
       <workItem from="1647668332220" duration="8756000" />
       <workItem from="1647758151226" duration="15023000" />
-      <workItem from="1647836663111" duration="10923000" />
+      <workItem from="1647836663111" duration="13516000" />
+      <workItem from="1647869824960" duration="395000" />
     </task>
     <servers />
   </component>
