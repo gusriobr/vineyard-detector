@@ -164,7 +164,7 @@ the final prediction. Keep in mind that the objective of this model is to predic
 patch from 48px2 to 64px2 we increase the real prediction area from 12m2 to 16m2, which will lead to less precision 
 in the final segmentation of the image.
 
-**Final results**
+###**Final results**###
 Increasing the patch size has improved the performance in a 0.01% - 0.001% depending on the model. 
 
 | model| loss| accuracy| val_loss| val_accuracy |
