@@ -51,7 +51,8 @@ if __name__ == '__main__':
 
     model_defs = [
         # build_model_f("InceptionV3", img_augmentation, IMG_SIZE),
-        ["cnnv1_64", build_cc],
+        # ["cnnv1", build_cc],
+        ["vgg19", build_model_f("vgg19", img_augmentation, IMG_SIZE)],
         ["Xception", build_model_f("Xception", img_augmentation, IMG_SIZE)],
         ["effNet_64", build_model_f("EfficientNetB0", img_augmentation, IMG_SIZE)],
         ["InceptionV3", build_model_f("InceptionV3", img_augmentation, IMG_SIZE)],
@@ -121,4 +122,6 @@ if __name__ == '__main__':
 
         logging.info("Training process finished successfully!")
 
-        # summarize(base_output)
+        summarize(base_output)
+
+        logging.info("Model stats summarized!")

@@ -43,7 +43,6 @@ def build_model_f(name, img_augmentation, image_size):
     def model_f():
         return build_model(name, activation="relu", augmentation_layer=img_augmentation, freeze_weights=True,
                            image_size=image_size)
-
     return model_f
 
 
@@ -55,6 +54,8 @@ def build_model(name, activation="relu", augmentation_layer=None, freeze_weights
 
     x = tf.keras.layers.Resizing(144, 144)(x)
 
+    if name == "vgg19":
+        trained_model = tf.keras.applications.vgg19.VGG19(include_top=False, input_tensor=x)
     if name == "EfficientNetB0":
         trained_model = tf.keras.applications.efficientnet.EfficientNetB0(include_top=False, input_tensor=x,
                                                                           drop_connect_rate=0.4)

@@ -86,8 +86,8 @@ To run the training process, edit the file to activate train, evaluation, etc. a
 vineyard-detector/vineyard/train/run_train.py
 ```
 
-## Iteration 0, VGG-16 prototype
-Using a VGG16 as base model outcomes a validation accuracy around 91%, but running predictions on the raster and 
+## Iteration 0, VGG-19 prototype
+Using a VGG19 as base model outcomes a validation accuracy around 91%, but running predictions on the raster and 
 visualizing the results, showed the model has some trouble predicting regular structures that look similar to vineyard 
 lines, like fruit trees, solar panel installations, some roads and tractor tracks.
 
@@ -103,7 +103,7 @@ After generating a new dataset version these are the supporting samples for each
 |Test | 1621        | 1140     |
 
 ## Iteration 1, testing different architectures
-After improving the dataset, the VGG-16 model accuracy improved up to 96.1%, the results area consistent with similar
+After improving the dataset, the VGG-19 model accuracy improved up to 96.1%, the results area consistent with similar
 work [1]. In this iteration new base models were tried but with no better results: 
 - Xception
 - ResNet50
@@ -114,7 +114,7 @@ with rest addition between layers but with poor results, the validation accuracy
 The architecture of the model was reduced to force overfitting and different tries were made using different in the 
 activation functions, number of filters, kernel but the accuracy didn't improve.
 
-Trying to train state of the art model from scratch didn't make it better, using VGG-16 or RestNet50 and unfreezing 
+Trying to train state of the art model from scratch didn't make it better, using VGG-19 or RestNet50 and unfreezing 
 inner weights before training outcome a similar 43% accuracy. 
 Similar work [3] shows good performance (96-98% accuracy) of CNN networks in high resolution aerial images with relatively small patches (3x3 to 11x11 px). 
 
@@ -127,7 +127,7 @@ The receptive field of convNets is amplified as we get deeper in the network arc
 bigger pixel-location information. These architectures are designed to handle 144px images, and changing the input tensor 
 to only 48px causes filters on certain layers to be limited to 1px, which may explain why deeper layers don't receive 
 enough information and can't create specific pattern detectors for this problem. 
-Visualizing the filters of the VGG-16 and RestNet-50 models delivered from scratch, only the first 3-4 layers showed 
+Visualizing the filters of the VGG-19 and RestNet-50 models delivered from scratch, only the first 3-4 layers showed 
 information, the rest were basically noise.
 
 To check this patch size problem, a resizing layer is included in the model before entering to first convolutional layer:
@@ -137,6 +137,13 @@ To check this patch size problem, a resizing layer is included in the model befo
 
 With this the accuracy **boosted over 98%** in the basic CNN model and specific patters appeared in the layer visualizations:
 
+|model | loss | accuracy|   val_loss  | val_accuracy|        
+|cnnv1 | 0.011079|   0.996549|   0.010886|       0.997820       |
+|ResNet50 | 0.656780|   0.947230|   0.401935|       0.969056    |
+|Xception | 0.919684|   0.933509|   0.726747|       0.948223    |
+|InceptionV3 | 1.511058|   0.891029|   1.000285|       0.928002 |
+|effNet | 3.613831|   0.698196|   1.506067|       0.836119      |
+
 | ![layer 5](resources/cnn_activations/5_separable_conv2d_2.png) |
 |:--:|
 | Layer 5 filter activations|
@@ -144,6 +151,30 @@ With this the accuracy **boosted over 98%** in the basic CNN model and specific 
 | ![layer 9](resources/cnn_activations/9_separable_conv2d_5.png)|
 |:--:|
 | Layer 9 filter activations|
+
+## Iteration 3, increase patch size
+As seen in iteration 2, the size of the image significantly affects the performance of the convnet. The resing layer 
+added in iteration 2 widens the image to allow deeper layers to have enough activation field to generate patterns, but 
+it doesn't really widen the source information, the patch information is the same.
+In this iteration we generate a new dataset taking 64x64px as patch size. This has the drawback of a loss in prediction in 
+the final prediction. Keep in mind that the objective of the model is to predict areas with vineyards, by expanding the 
+patch from 48px2 to 64px2 we increase the real prediction area from 12m2 to 16m2, which will lead to less precision 
+in the final segmentation of the image.
+
+Increa
+
+**Final results**
+
+| model| loss| accuracy| val_loss| val_accuracy |
+| -----| ----| --------| -------| ---------- |
+| cnnv1| 0.005155| 0.998417| 0.001896| 0.999694 |
+| ResNet50| 0.656780| 0.947230| 0.401935| 0.969056 |
+| vgg19| 0.654819| 0.941029| 0.403857| 0.964154 |
+| Xception| 0.919684| 0.933509| 0.726747| 0.948223 |
+| InceptionV3| 1.511058| 0.891029| 1.000285| 0.928002 |
+| effNet| 2.469209| 0.801715| 1.608626| 0.874387 |
+
+
 
 # Inference
 To apply the model to an input raster file, a non-overlapping sliding window (stride = 48px) is applied to annotate each 
@@ -159,18 +190,6 @@ To run inference, edit the file `run_inf.py` and set the folder with the input i
     input_folder = '/.../data/rasters/aerial/pnoa/2020/'
     output_folder = '/.../raster/processed'
 ```
-
-
-# Final results
-
-| model| loss| accuracy| val_loss| val_accuracy |
-| -----| ----| --------| -------| ---------- |
-| cnnv1| 0.005155| 0.998417| 0.001896| 0.999694 |
-| ResNet50| 0.656780| 0.947230| 0.401935| 0.969056 |
-| vgg19| 0.654819| 0.941029| 0.403857| 0.964154 |
-| Xception| 0.919684| 0.933509| 0.726747| 0.948223 |
-| InceptionV3| 1.511058| 0.891029| 1.000285| 0.928002 |
-| effNet| 2.469209| 0.801715| 1.608626| 0.874387 |
 
 
 # Related work
