@@ -137,10 +137,13 @@ To check this patch size problem, a resizing layer is included in the model befo
 
 With this the accuracy **boosted over 98%** in the basic CNN model and specify patters appeared in the layers:
 
-![layer 5](resources/cnn_activations/5_separable_conv2d_2.png)
-*Layer 5 activations*
-![layer 9](resources/cnn_activations/9_separable_conv2d_5.png)
-*Layer 9 activations*
+| ![layer 5](resources/cnn_activations/5_separable_conv2d_2.png) |
+|:--:|
+| Layer 5 filter activations|
+
+| ![layer 9](resources/cnn_activations/9_separable_conv2d_5.png)|
+|:--:|
+| Layer 9 filter activations|
 
 # Inference
 To apply the model to an input raster file, a non-overlapping sliding window (stride = 48px) is applied to annotate each 
