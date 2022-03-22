@@ -108,7 +108,7 @@ def create_dataset_file(patches_path, output_folder, split=0.3):
     splits_folder = os.path.join(output_folder, "splits")
     split_patches(patches_path, splits_folder, split=split)
     # train
-    logging.info("Loading traing batch")
+    logging.info("Loading training batch")
     x_train, y_train = load_batch(os.path.join(splits_folder, "train"))
     logging.info("Loading test batch")
     x_test, y_test = load_batch(os.path.join(splits_folder, "test"))

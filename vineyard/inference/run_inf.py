@@ -188,15 +188,13 @@ def build_model(model_folder, img_size=48):
 if __name__ == '__main__':
     # load srs model
     models = [
-        ['/media/gus/workspace/wml/vineyard-detector/results/iteration2/cnnv1/', 'cnnv1', 1],
+        ['/media/gus/workspace/wml/vineyard-detector/results/iteration4/cnnv1/', 'cnnv1', 1],
     ]
     input_folder = '/media/gus/data/rasters/aerial/pnoa/2020/'
-    output_folder = '/media/gus/data/viticola/raster/processed_v2'
+    output_folder = '/media/gus/data/viticola/raster/processed_v3'
 
     input_images = [os.path.join(input_folder, f_image) for f_image in os.listdir(input_folder) if
                     f_image.endswith(".tif")]
-
-    input_images = ['/media/gus/data/rasters/aerial/pnoa/2020/PNOA_CYL_2020_25cm_OF_etrsc_rgb_hu30_h05_0345_6-4.tif']
 
     patch_size = 48
     for m in models:

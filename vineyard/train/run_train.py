@@ -21,7 +21,7 @@ cfg.configLog()
 kwargs = {}
 
 img_augmentation = tf.keras.models.Sequential([
-    layers.RandomContrast(factor=0.1),
+    layers.RandomContrast(factor=0.2),
     layers.RandomZoom(height_factor=(-0.2, 0.2))
 ], name="img_augmentation")
 
@@ -32,7 +32,7 @@ def build_cc():
 
 if __name__ == '__main__':
     dataset_file = "/media/gus/data/viticola/datasets/dataset_v2/dataset.npy"
-    base_output = cfg.results("iteration2")
+    base_output = cfg.results("iteration4")
 
     train_model = True
     eval_model = False
@@ -51,12 +51,12 @@ if __name__ == '__main__':
 
     model_defs = [
         # build_model_f("InceptionV3", img_augmentation, IMG_SIZE),
-        # ["cnnv1", build_cc],
+        ["cnnv1", build_cc],
         ["vgg19", build_model_f("vgg19", img_augmentation, IMG_SIZE)],
-        ["Xception", build_model_f("Xception", img_augmentation, IMG_SIZE)],
-        ["effNet_64", build_model_f("EfficientNetB0", img_augmentation, IMG_SIZE)],
-        ["InceptionV3", build_model_f("InceptionV3", img_augmentation, IMG_SIZE)],
-        ["ResNet50", build_model_f("ResNet50", img_augmentation, IMG_SIZE)],
+        # ["Xception", build_model_f("Xception", img_augmentation, IMG_SIZE)],
+        # ["effNet_64", build_model_f("EfficientNetB0", img_augmentation, IMG_SIZE)],
+        # ["InceptionV3", build_model_f("InceptionV3", img_augmentation, IMG_SIZE)],
+        # ["ResNet50", build_model_f("ResNet50", img_augmentation, IMG_SIZE)],
     ]
 
     for model_def in model_defs:

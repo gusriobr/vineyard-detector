@@ -1,8 +1,6 @@
 Vineyard detection using high resolution images (25cm/px)
 ===============================================================
 
-UNDER DEVELOPMENT
-
 # Objective
 
 Detect vineyard land usage using convolutional network based on aerial images dataset. The objective is to train a
@@ -202,6 +200,8 @@ increasing the information with the patch size improves the model performance.
 | InceptionV3| 1.511058| 0.891029| 1.000285| 0.928002 | +0.006 |
 | effNet| 2.469209| 0.801715| 1.608626| 0.874387 | +0.04  |
 
+## Iteration 4, improving data quality
+
 # Inference
 
 To apply the model to an input raster file, a non-overlapping sliding window (stride = 48px) is applied to annotate each
@@ -219,7 +219,11 @@ input_folder = '/.../data/rasters/aerial/pnoa/2020/'
 output_folder = '/.../raster/processed'
 ```
 
+**Some prediction examples**
+
 ![Prediction example](resources/assets/prediction1.png)
+![Prediction example](resources/assets/prediction2.png)
+![Prediction example](resources/assets/prediction3.png)
 # Related work
 
 ## Papers

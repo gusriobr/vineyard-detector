@@ -26,11 +26,12 @@ def prepare_folder(folder):
 if __name__ == '__main__':
     raster_folder = "/media/gus/data/viticola/raster"
     feature_file = cfg.resource('selectedParcels/selected_parcels.shp')
-    dataset_folder = "/media/gus/data/viticola/datasets/dataset_v3"
+    dataset_folder = "/media/gus/data/viticola/datasets/dataset_v2"
 
     do_extract_lirs = False
-    do_extract_patches = True
-
+    do_extract_patches = False
+    do_create_dataset = True
+    image_size = 48
 
     # extract feature lirs from raster filtering by feature file
     lirs_folder = os.path.join(dataset_folder, "lirs")
@@ -46,14 +47,17 @@ if __name__ == '__main__':
     if do_extract_patches:
         logging.info("Extracting patches from lirs")
         prepare_folder(patches_path)
-        patch_options = {"size": 64, "folder_per_category": True, "max_patches": 60}
+        patch_options = {"size": image_size, "folder_per_category": True, "max_patches": 60}
         extract_patches(lirs_folder, patches_path, patch_options)
 
-    # features with label 2 --> rename to mark as "no-vineyard"
-    if os.path.exists(os.path.join(dataset_folder, "patches/2")):
-        logging.info("Renaming patches output folder")
-        os.rename(os.path.join(dataset_folder, "patches/2"), os.path.join(dataset_folder, "patches/0"))
+        # features with label 2 --> rename to mark as "no-vineyard" (folder 0)
+        if os.path.exists(os.path.join(dataset_folder, "patches/2")):
+            logging.info("Renaming patches output folder")
+            os.rename(os.path.join(dataset_folder, "patches/2"), os.path.join(dataset_folder, "patches/0"))
 
-    # create numpy array with images
-    logging.info("Creating dataset file: " + dataset_folder)
-    dataset.create_dataset_file(patches_path, dataset_folder)
+    if do_create_dataset:
+        # create numpy array with images
+        logging.info("Creating dataset file: " + dataset_folder)
+        dataset.create_dataset_file(patches_path, dataset_folder)
+
+    logging.info("Dataset creation finished!")

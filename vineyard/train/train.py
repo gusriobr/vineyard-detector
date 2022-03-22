@@ -35,7 +35,7 @@ def train(model, dataset_file, output_folder, epochs=200, batch_size=32, min_del
     datagen = ImageDataGenerator(rescale=1. / 255,
                                  featurewise_center=True,
                                  featurewise_std_normalization=True,
-                                 rotation_range=20,
+                                 rotation_range=180,
                                  width_shift_range=0.2,
                                  height_shift_range=0.2,
                                  horizontal_flip=True,
