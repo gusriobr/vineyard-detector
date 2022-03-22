@@ -65,10 +65,10 @@ def filter_features(input_file, output_file):
 
 
 if __name__ == '__main__':
-    input_folder = '/media/gus/data/viticola/raster/processed'
+    input_folder = '/media/gus/data/viticola/raster/processed_v3'
     input_images = [os.path.join(input_folder, f_img) for f_img in os.listdir(input_folder) if f_img.endswith(".tif")]
+    output_file = cfg.results("vineyard_polygons.shp")
 
-    output_file = "/tmp/vineyard.shp"
     for f_image in input_images:
         vectorize_predictions(f_image, output_file)
 

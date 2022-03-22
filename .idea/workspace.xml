@@ -11,7 +11,8 @@
       <change beforePath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/models/pretrained.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/raster.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/raster.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/train_srs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/train_srs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vineyard/postproc/run_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/postproc/run_post.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +102,7 @@
       <recent name="$PROJECT_DIR$/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_inf">
+  <component name="RunManager" selected="Python.run_post">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -187,6 +188,25 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run_post" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="vineyard-detector" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vineyard/postproc" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vineyard/postproc/run_post.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="run_train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -209,35 +229,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_train_cpu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="vineyard-detector" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vineyard/train" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vineyard/train/run_train_cpu.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run_post" />
         <item itemvalue="Python.run_inf" />
         <item itemvalue="Python.run_train" />
         <item itemvalue="Python.run" />
         <item itemvalue="Python.eval" />
-        <item itemvalue="Python.run_train_cpu" />
       </list>
     </recent_temporary>
   </component>
@@ -282,7 +280,7 @@
       <workItem from="1647869824960" duration="772000" />
       <workItem from="1647874236580" duration="4164000" />
       <workItem from="1647926588179" duration="8807000" />
-      <workItem from="1647961443526" duration="3915000" />
+      <workItem from="1647961443526" duration="5824000" />
     </task>
     <servers />
   </component>
