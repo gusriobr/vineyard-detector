@@ -48,7 +48,7 @@ vineyard-detector/vineyard/data/run.py
 Edit the python code and set these variables:
 
 ``` python
-    raster_folder = 'Locatio nof your aerial images'
+    raster_folder = 'Location of your aerial images'
     feature_file = cfg.resource('selectedParcels/selected_parcels.shp')  # features to cut out the rasters and extract lirs and patches.
     dataset_folder = "/media/gus/data/viticola/datasets/dataset_v2"  # destination directory for lirs, patches and dataset.npy
 ```
