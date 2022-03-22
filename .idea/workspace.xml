@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8dff21a1-1473-4862-b41c-a127652c2c18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/assets/prediction2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/assets/prediction3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/cnn/models/resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/cnn/models/resnet.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/apply_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/apply_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/dataset/combine_images.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/dataset/combine_images.py" afterDir="false" />
@@ -15,11 +13,6 @@
       <change beforePath="$PROJECT_DIR$/../srs/srs/train_srs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/train_srs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/data/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/data/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/data/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/data/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/inference/run_inf.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/inference/run_inf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/train/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/train/run_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/train/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/train/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,7 +283,7 @@
       <workItem from="1647869824960" duration="772000" />
       <workItem from="1647874236580" duration="4164000" />
       <workItem from="1647926588179" duration="8807000" />
-      <workItem from="1647961443526" duration="2366000" />
+      <workItem from="1647961443526" duration="3470000" />
     </task>
     <servers />
   </component>

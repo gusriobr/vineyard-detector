@@ -200,9 +200,7 @@ increasing the information with the patch size improves the model performance.
 | InceptionV3| 1.511058| 0.891029| 1.000285| 0.928002 | +0.006 |
 | effNet| 2.469209| 0.801715| 1.608626| 0.874387 | +0.04  |
 
-## Iteration 4, improving data quality
-
-# Inference
+# Predictions
 
 To apply the model to an input raster file, a non-overlapping sliding window (stride = 48px) is applied to annotate each
 48x48px patch with 0 or 1 = vineyard. The resulting single-band raster is normalized to range 0-255 and geo-referenced
@@ -224,6 +222,23 @@ output_folder = '/.../raster/processed'
 ![Prediction example](resources/assets/prediction1.png)
 ![Prediction example](resources/assets/prediction2.png)
 ![Prediction example](resources/assets/prediction3.png)
+
+
+# Conclusions
+This project example is a simple, typical use case of using convolution networks to detect patterns and textures in images.
+Most of the complexity of this project is not in the deep-learning part but in the data processing itself: image selection
+and location, decision on patch size, extraction of lirs and patches, manual review and filtering, etc.
+
+But this is only the first step of a larger project, the goal is to use this model to deliver a weakly supervised 
+semantic segmentation model to automatically draw vineyard plots without using manual annotated samples.
+
+Vineyard plots (usually) have a homogeneous geometric structure that repeats itself. The idea is to use the internal 
+weights of the layers of the classifier model obtained in this project, as input features to automatically classify
+the parcels in different groups, so two contiguous vineyard plots with different orientation are separated in two groups.
+
+With these annotations we can extract masks automatically to create a dataset that will feed the training process
+of the semantic classifier.
+
 # Related work
 
 ## Papers
