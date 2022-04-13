@@ -12,7 +12,6 @@
       <change beforePath="$PROJECT_DIR$/../srs/srs/raster.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/raster.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../srs/srs/train_srs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../srs/srs/train_srs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vineyard/postproc/run_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/vineyard/postproc/run_post.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EDA-ROYA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vineyard-sketcher" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -173,6 +172,9 @@
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vineyard/inference" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -192,6 +194,9 @@
       <module name="vineyard-detector" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vineyard/postproc" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -280,7 +285,8 @@
       <workItem from="1647869824960" duration="772000" />
       <workItem from="1647874236580" duration="4164000" />
       <workItem from="1647926588179" duration="8807000" />
-      <workItem from="1647961443526" duration="5824000" />
+      <workItem from="1647961443526" duration="5955000" />
+      <workItem from="1648049089062" duration="13000" />
     </task>
     <servers />
   </component>
