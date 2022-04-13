@@ -4,8 +4,8 @@ import shutil
 from pathlib import Path
 
 import cfg
-from data.patches import extract_patches
-from data.prepare_data import create_lirs
+from vineyard.data.patches import extract_patches
+from vineyard.data.prepare_data import create_lirs
 from vineyard.data import dataset
 
 cfg.configLog()

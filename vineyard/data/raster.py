@@ -1,4 +1,3 @@
-import numpy as np
 import rasterio
 from affine import Affine
 
@@ -30,7 +29,7 @@ def georeference_image(img, img_source, img_filename, scale=1, bands=3):
 
         print(meta)
 
-        with rasterio.open(img_filename, 'w', **meta) as dst:
+        with rasterio.open(img_filename, 'w', **meta, compress="JPEG") as dst: #, photometric="YCBCR"
             for ch in range(img.shape[-1]):
                 # iterate over channels and write bands
                 img_channel = img[:, :, ch]
