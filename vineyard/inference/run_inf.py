@@ -161,13 +161,7 @@ def extract_images(image_path, patch_size, output_path, model, datagen=None, cha
         y_output = y * scale
         output_img[y_output:y_output + output_patch, x_output:x_output + output_patch] = pred_to_category(y_pred[0])
 
-    # io.imsave(output_path, plot_conv_output())
-    # io.imsave(output_path, output_img, compress=8)
-    # im = Image.fromarray(output_img)
-    # im.save(output_path, compression="jpeg", quality=50)
     cv2.imwrite(output_path, output_img)
-    # cv2.imwrite(output_path.replace(".tif", "_2.tif"), output_img)
-    # io.imsave(output_path, output_img)
 
 
 def read_img(path):
