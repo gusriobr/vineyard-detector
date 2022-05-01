@@ -1,21 +1,25 @@
+import glob
 import logging
 import os
+import sys
 
+import cv2
 import numpy as np
 import tensorflow as tf
-import cv2
 from keras_preprocessing.image import ImageDataGenerator
 from skimage import io
 from tensorflow.python.keras import backend as K
 
-from vineyard.data.model import DatasetDef
+ROOT_DIR = os.path.abspath("../../")
+sys.path.append(ROOT_DIR)
 
+from vineyard import cfg
+from vineyard.data.model import DatasetDef
 from vineyard.data.raster import georeference_image
+from vineyard.models.cnn import BasicCNN
 
 layers = tf.keras.layers
 
-import cfg
-from models.cnn import BasicCNN
 
 cfg.configLog()
 
@@ -187,20 +191,49 @@ def build_model(model_folder, img_size=48):
     return loaded_model
 
 
+def load_pnoa_filenames(base_folder, tile_file):
+    """
+    Localiza tiles del pnoa a partir de fichero
+    :param base_folder:
+    :return:
+    """
+    lines = open(tile_file).read().splitlines()
+    files = set()
+    for line in lines:
+        if line:  # not empty
+            # is a file
+            fabs = "{}/{}"
+            if os.path.exists(fabs) and os.path.isfile(fabs):
+                files.add(fabs)
+            else:
+                nested_files = glob.glob("{}/{}/*.tif".format(base_folder, line))
+                if len(nested_files) > 0:
+                    # it has nested tif
+                    files.update(nested_files)
+                else:
+                    # it has nested folders with tifs
+                    nested_files = glob.glob("{}/{}/**/*.tif".format(base_folder, line))
+                    files.update(nested_files)
+    lst_files = list(files)
+    lst_files.sort()
+    return lst_files
+
+
 if __name__ == '__main__':
     # load srs model
     models = [
-        ['/media/gus/workspace/wml/vineyard-detector/results/iteration4/cnnv1/', 'cnnv1', 1],
+        ['/workspaces/wml/vineyard-detector/results/iteration4/cnnv1/', 'cnnv1', 1],
     ]
-    input_folder = '/media/gus/data/rasters/aerial/pnoa/2020/'
-    output_folder = '/media/gus/data/viticola/raster/processed_v4'
+    # input_folder = '/media/gus/data/rasters/aerial/pnoa/2020/'
+    # output_folder = '/media/gus/data/viticola/raster/processed_v4'
+    input_folder = '/media/cartografia/01_Ortofotografia/'
+    output_folder = '/workspaces/wml/vineyard-detector/results/processed_v4/2021'
 
-    input_images = [os.path.join(input_folder, f_image) for f_image in os.listdir(input_folder) if
-                    f_image.endswith(".tif")]
-
-    input_images = [x for x in input_images if 'PNOA_CYL_2020_25cm_OF_etrsc_rgb_hu30_h05_0345_1-1.tif' in x]
-    # input_images = [x for x in input_images if 'OUTPUT.tif' in x]
+    # find all nested images
+    input_images = load_pnoa_filenames(input_folder, cfg.project_file('vineyard/inference/pnoa_files.txt'))
     input_images.sort()
+
+    # input_images = ['/workspaces/wml/vineyard-detector/resources/PNOA_CYL_2020_25cm_OF_etrsc_rgb_hu30_h05_0345_4-6.tif']
 
     patch_size = 48
     for m in models:
@@ -231,7 +264,7 @@ if __name__ == '__main__':
             rimg = read_img(outf)
             rimg = rimg[:, :, np.newaxis]
             georeference_image(rimg, input, outf, scale=1, bands=1)
-            logging.info("Finished with file {}.".format(input))
+            logging.info("Finished processing file {}, \ngenerated output raster {}.".format(input, outf))
 
     # plt.show()
     logging.info("========================================")

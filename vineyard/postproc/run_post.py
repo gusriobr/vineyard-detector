@@ -1,8 +1,9 @@
 """
-Post processing to create feature file out of the raster images
+Post processing to create feature file out from raster images
 """
-import logging
 import os
+import sys
+import logging
 from collections import OrderedDict
 
 import fiona
@@ -11,7 +12,10 @@ from fiona.crs import from_epsg
 from rasterio import features
 from shapely.geometry import shape
 
-import cfg
+ROOT_DIR = os.path.abspath("../../")
+sys.path.append(ROOT_DIR)
+
+from vineyard import cfg
 
 cfg.configLog()
 
@@ -65,14 +69,17 @@ def filter_features(input_file, output_file):
 
 
 if __name__ == '__main__':
-    input_folder = '/media/gus/data/viticola/raster/processed_v3'
+    input_folder = cfg.results("processed_v4/2020")
     input_images = [os.path.join(input_folder, f_img) for f_img in os.listdir(input_folder) if f_img.endswith(".tif")]
     output_file = cfg.results("vineyard_polygons.shp")
 
-    for f_image in input_images:
+    total = len(input_images)
+    for i, f_image in enumerate(input_images):
+        logging.info("Vectorizing image {} of {}".format(i + 1, total))
         vectorize_predictions(f_image, output_file)
 
-    filtered_output_file = "/tmp/vineyard_filtered.shp"
+    filtered_output_file = cfg.results("vineyard_polygons_filtered.shp")
+    logging.info("Filtering out small polygons")
     filter_features(output_file, filtered_output_file)
 
     logging.info("Filtered geometries successfully written");
