@@ -27,8 +27,6 @@ def georeference_image(img, img_source, img_filename, scale=1, bands=3):
         new_affine = meta["transform"] * Affine.scale(1 / scale, 1 / scale)
         meta.update({"transform": new_affine})
 
-        print(meta)
-
         with rasterio.open(img_filename, 'w', **meta, compress="JPEG") as dst: #, photometric="YCBCR"
             for ch in range(img.shape[-1]):
                 # iterate over channels and write bands

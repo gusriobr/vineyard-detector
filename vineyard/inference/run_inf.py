@@ -2,8 +2,8 @@ import logging
 import os
 
 import numpy as np
+import skimage.io
 import tensorflow as tf
-import cv2
 from keras_preprocessing.image import ImageDataGenerator
 from skimage import io
 from tensorflow.python.keras import backend as K
@@ -161,7 +161,7 @@ def extract_images(image_path, patch_size, output_path, model, datagen=None, cha
         y_output = y * scale
         output_img[y_output:y_output + output_patch, x_output:x_output + output_patch] = pred_to_category(y_pred[0])
 
-    cv2.imwrite(output_path, output_img)
+    skimage.io.imsave(output_path, output_img)
 
 
 def read_img(path):
