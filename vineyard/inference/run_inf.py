@@ -11,6 +11,8 @@ from keras_preprocessing.image import ImageDataGenerator
 from skimage import io
 from tensorflow.python.keras import backend as K
 
+from image.sliding import batched_sliding_window
+
 ROOT_DIR = os.path.abspath("../../")
 sys.path.append(ROOT_DIR)
 
@@ -20,7 +22,6 @@ from vineyard.data.raster import georeference_image
 from vineyard.models.cnn import BasicCNN
 
 layers = tf.keras.layers
-
 
 cfg.configLog()
 
@@ -66,8 +67,31 @@ def predict(model, x, datagen, std_f):
         return model.predict_generator(predict_gen)
 
 
-def extract_images(image_path, patch_size, output_path, model, datagen=None, channels=[0, 1, 2],
-                   scale=1, treat_borders=True, std_f=None):  # hr_dim=96, scales=[1, 2, 3, 4]):
+def apply_model_slide(image_path, model, window_size=(48, 48), step_size=48, batch_size=64, std_f=None, threshold=0.8):
+    # load the input image
+    image = read_img(image_path)
+
+    # grab the dimensions of the input image and crop the image such
+    # that it tiles nicely when we generate the training data +
+    # labels
+    (h, w) = image.shape[:2]
+
+    output_img = np.zeros((h, w, 1), dtype=np.uint8)
+
+    for images, positions in batched_sliding_window(image, window_size, step_size, batch_size=batch_size):
+        # apply model
+        y_pred = predict(model, images, datagen, std_f)
+        # thresholding
+        y_pred = np.where(y_pred > threshold, 255, 0)
+        # paste into original image
+        for i, pos in enumerate(positions):
+            output_img[pos[1]:pos[1] + window_size[0], pos[0]:pos[0] + window_size[1]] = y_pred[i]
+
+    return output_img
+
+
+def apply_model(image_path, patch_size, output_path, model, datagen=None, channels=[0, 1, 2],
+                scale=1, treat_borders=True, std_f=None):  # hr_dim=96, scales=[1, 2, 3, 4]):
     """
         Iterate over the image to extract patches
     """
@@ -150,7 +174,7 @@ def extract_images(image_path, patch_size, output_path, model, datagen=None, cha
         i = 0
         x_output = x * scale
         for y in range(0, h * scale - output_patch + 1, output_patch):
-            output_img[y:y + output_patch, x_output:x_output + output_patch] = pred_to_category(y_pred[i])
+            output_img[y:y + patch_size, x_output:x_output + output_patch] = pred_to_category(y_pred[i])
             i += 1
 
     if rest_h > 0 or rest_w > 0 and treat_borders:
@@ -223,18 +247,21 @@ def load_pnoa_filenames(base_folder, tile_file):
 if __name__ == '__main__':
     # load srs model
     models = [
-        ['/workspaces/wml/vineyard-detector/results/iteration4/cnnv1/', 'cnnv1', 1],
+        # ['/workspaces/wml/vineyard-detector/results/iteration4/cnnv1/', 'cnnv1', 1],
+        ['/media/gus/workspace/wml/vineyard-detector/results/iteration4/cnnv1/', 'cnnv1', 1],
     ]
     # input_folder = '/media/gus/data/rasters/aerial/pnoa/2020/'
-    # output_folder = '/media/gus/data/viticola/raster/processed_v4'
+    output_folder = '/media/gus/data/viticola/raster/processed_v4'
     input_folder = '/media/cartografia/01_Ortofotografia/'
-    output_folder = '/workspaces/wml/vineyard-detector/results/processed_v4/2021'
+    # output_folder = '/workspaces/wml/vineyard-detector/results/processed_v4/2021'
 
     # find all nested images
     input_images = load_pnoa_filenames(input_folder, cfg.project_file('vineyard/inference/pnoa_files.txt'))
     input_images.sort()
 
-    # input_images = ['/workspaces/wml/vineyard-detector/resources/PNOA_CYL_2020_25cm_OF_etrsc_rgb_hu30_h05_0345_4-6.tif']
+    input_images = ['/media/gus/workspace/wml/vineyard-detector/test/resources/aerial1.tif']
+    input_images = [
+        '/media/gus/data/rasters/aerial/pnoa/2020/H50_0373/PNOA_CYL_2020_25cm_OF_etrsc_rgb_hu30_h05_0373_7-2.tif']
 
     patch_size = 48
     for m in models:
@@ -258,12 +285,16 @@ if __name__ == '__main__':
             filename = os.path.basename(input)
             base, ext = os.path.splitext(filename)
             outf = os.path.join(output_folder, "{}_{}{}".format(base, tag, ext))
+            output_img = apply_model_slide(input, model, window_size=(patch_size, patch_size), step_size=patch_size,
+                                           batch_size=1024*10, std_f=std_func)
+            skimage.io.imsave(outf, output_img)
 
-            extract_images(input, patch_size, outf, model, std_f=std_func, channels=[0, 1, 2], scale=1)
+            # apply_model(input, patch_size, outf, model, std_f=std_func, channels=[0, 1, 2], scale=1)
 
             logging.info("Applying geolocation info.")
             rimg = read_img(outf)
-            rimg = rimg[:, :, np.newaxis]
+            if len(rimg.shape) == 2:
+                rimg = rimg[:, :, np.newaxis]
             georeference_image(rimg, input, outf, scale=1, bands=1)
             logging.info("Finished processing file {}, \ngenerated output raster {}.".format(input, outf))
 
